@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+
+{% if status=="VALID" %}
+
+<h1>
+✅ VALID COUPON
+</h1>
+
+{% else %}
+
+<h1>
+❌ ALREADY USED
+</h1>
+
+{% endif %}
+
+<h2>{{usn}}</h2>
+
+</body>
+
+</html>
