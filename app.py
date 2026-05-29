@@ -27,17 +27,13 @@ def init_db():
     conn.execute("""
     CREATE TABLE IF NOT EXISTS coupons(
 
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
 
-        usn TEXT UNIQUE,
+    usn TEXT UNIQUE,
 
-        token TEXT UNIQUE,
+    token TEXT UNIQUE,
 
-        used INTEGER DEFAULT 0,
-
-        generated_at TEXT,
-
-        used_at TEXT
+    used INTEGER DEFAULT 0
 
     )
     """)
@@ -110,23 +106,18 @@ def generate():
 
         token = str(uuid.uuid4())
 
-        generated_time = datetime.now().strftime(
-            "%Y-%m-%d %H:%M:%S"
-        )
-
         c.execute(
-            """
-            INSERT INTO coupons
-            (usn, token, generated_at)
+             """
+    INSERT INTO coupons
+    (usn, token)
 
-            VALUES (?, ?, ?)
-            """,
-            (
-                usn,
-                token,
-                generated_time
-            )
-        )
+    VALUES (?, ?)
+    """,
+    (
+        usn,
+        token
+    )
+    )
 
         conn.commit()
 
