@@ -4,7 +4,6 @@ import pandas as pd
 import uuid
 import qrcode
 import os
-from datetime import datetime
 
 app = Flask(__name__)
 
@@ -193,23 +192,13 @@ def verify(token):
             usn=usn
         )
 
-    used_time = datetime.now().strftime(
-        "%Y-%m-%d %H:%M:%S"
-    )
-
     c.execute(
         """
         UPDATE coupons
-
-        SET used=1,
-            used_at=?
-
+        SET used=1
         WHERE token=?
         """,
-        (
-            used_time,
-            token
-        )
+        (token,)
     )
 
     conn.commit()
@@ -220,7 +209,6 @@ def verify(token):
         status="VALID",
         usn=usn
     )
-
 # =====================================================
 # ADMIN DASHBOARD
 # =====================================================
